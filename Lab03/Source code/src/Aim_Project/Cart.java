@@ -17,6 +17,26 @@ public class Cart {
 			System.out.println("The disc has been added");
 		}
 		
+//		Add bằng Array
+//		public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+//		    for (int i = 0; i < dvdList.length; i++) {
+//		        addDigitalVideoDisc(dvdList[i]);
+//		    }
+//		}
+		
+//		Add theo list
+		public void addDigitalVideoDisc(DigitalVideoDisc... dvdList) {
+		    for (DigitalVideoDisc dvd : dvdList) {
+		        addDigitalVideoDisc(dvd);
+		    }
+		}
+		
+// 		Add 2 DVD
+		public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+		    addDigitalVideoDisc(dvd1);
+		    addDigitalVideoDisc(dvd2);
+		}
+		
 		public float totalCost() {
 			float total = 0;
 			for (int i=0; i<qtyOrdered;i++) {
@@ -42,7 +62,7 @@ public class Cart {
 			
 			// Thực hiện việc dịch chèn lên trước (vid cần xóa sẽ bị đè)
 			for (int i = find ; i < qtyOrdered; i++) {
-				itemsOrdered[find] = itemsOrdered[find+1];
+				itemsOrdered[i] = itemsOrdered[i+1];
 			}
 			
 			// Vị trí cuối sẽ null vì bị xóa 1 vid r
