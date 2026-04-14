@@ -41,6 +41,7 @@ public class DigitalVideoDisc {
 	public String getTitle() {
 		return title;
 	}
+	
 	public String getCategory() {
 		return category;
 	}
@@ -53,5 +54,11 @@ public class DigitalVideoDisc {
 	public float getCost() {
 		return cost;
 	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	
 
 }
