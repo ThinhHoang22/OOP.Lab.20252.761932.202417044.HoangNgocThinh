@@ -80,4 +80,31 @@ public class Cart {
 	        System.out.println("Total cost: "+totalCost());
 	        System.out.println("***************************************************");
 	    }
+		
+		// Tìm kiếm theo ID
+		public void searchById(int id) {
+		    for (int i = 0; i < qtyOrdered; i++) {
+		        if (itemsOrdered[i].getId() == id) {
+		            System.out.println("Found: " + itemsOrdered[i].toString());
+		            return;
+		        }
+		    }
+		    System.out.println("No matching DVD found!");
+		}
+		
+		// Tìm kiếm theo title
+		public void searchByTitle(String title) {
+		    boolean found = false;
+
+		    for (int i = 0; i < qtyOrdered; i++) {
+		        if (itemsOrdered[i].isMatch(title)) {
+		            System.out.println("Found: " + itemsOrdered[i].toString());
+		            found = true;
+		        }
+		    }
+
+		    if (!found) {
+		        System.out.println("No matching DVD found!");
+		    }
+		}
 }
