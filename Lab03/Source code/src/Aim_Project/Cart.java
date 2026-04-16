@@ -70,4 +70,14 @@ public class Cart {
 			qtyOrdered--;
 			System.out.println("The disc has been removed");	
 		}
+		
+		// Thực hiện in Cart
+		public void printCart(){
+	        System.out.println("***********************CART***********************\nOrdered Items:");
+	        for(int i=0; i<qtyOrdered; i++){
+	            System.out.println((i+1)+". DVD - "+itemsOrdered[i].toString());
+	        }
+	        System.out.println("Total cost: "+totalCost());
+	        System.out.println("***************************************************");
+	    }
 }
