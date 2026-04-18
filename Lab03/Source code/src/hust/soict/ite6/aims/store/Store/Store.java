@@ -1,4 +1,7 @@
-package Aim_Project;
+package hust.soict.ite6.aims.store.Store;
+
+import hust.soict.ite6.aims.disc.DigitalVideoDisc.DigitalVideoDisc;
+
 public class Store {
 	private DigitalVideoDisc[] itemsInStore;
     private int qtyInStore=0;

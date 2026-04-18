@@ -1,4 +1,7 @@
-package Aim_Project;
+package hust.soict.ite6.test.disc.TestPassingParameter;
+
+import hust.soict.ite6.aims.disc.DigitalVideoDisc.DigitalVideoDisc;
+
 public class TestPassingParameter {
 	public static void main(String[] args) {
 		DigitalVideoDisc jungleDVD= new DigitalVideoDisc("Jungle");

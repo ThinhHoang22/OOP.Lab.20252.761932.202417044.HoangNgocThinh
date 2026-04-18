@@ -1,4 +1,7 @@
-package Aim_Project;
+package hust.soict.ite6.aims.cart.Cart;
+
+import hust.soict.ite6.aims.disc.DigitalVideoDisc.DigitalVideoDisc;
+
 public class Cart {
 		public static final int MAX_NUMBERS_ORDERED = 20;
 		private DigitalVideoDisc itemsOrdered[];

@@ -1,4 +1,7 @@
-package Aim_Project;
+package hust.soict.ite6.test.store.StoreTest;
+
+import hust.soict.ite6.aims.disc.DigitalVideoDisc.DigitalVideoDisc;
+import hust.soict.ite6.aims.store.Store.Store;
 
 public class StoreTest {
     public static void main(String[] args) {
