@@ -1,52 +1,43 @@
 package hust.soict.ite6.aims.store.Store;
 
-import hust.soict.ite6.aims.disc.DigitalVideoDisc.DigitalVideoDisc;
+import hust.soict.ite6.aims.media.Media;
+
+import java.util.ArrayList;
+
 
 public class Store {
-	private DigitalVideoDisc[] itemsInStore;
-    private int qtyInStore=0;
-    public static final int MAX_ITEMS = 100;
+    private ArrayList<Media> itemsInStore = new ArrayList<>();
 
-    public Store() {
-        itemsInStore = new DigitalVideoDisc[MAX_ITEMS];
-        qtyInStore = 0;
+    public void addMedia(Media media) {
+        if (!itemsInStore.contains(media)) {
+            itemsInStore.add(media);
+            System.out.println("Media added to store.");
+        } else {
+            System.out.println("Media already exists in store.");
+        }
     }
-    
-    // add
-    public void addDVD(DigitalVideoDisc dvd){
-    	if(qtyInStore >= MAX_ITEMS) {
-    		System.out.println("The store is full!");
-            return;
-    	}
-    	itemsInStore[qtyInStore] = dvd;
-        qtyInStore++;
-        System.out.println("The DVD has been added to the store");
+
+    public void removeMedia(Media media) {
+        if (itemsInStore.contains(media)) {
+            itemsInStore.remove(media);
+            System.out.println("Media removed from store.");
+        } else {
+            System.out.println("Media does not exist in store.");
+        }
     }
-    
-    
-    // remove
-    public void removeDVD(DigitalVideoDisc dvd) {
-    	int find = -1;
-        for (int i = 0; i < qtyInStore; i++) {
-            if (itemsInStore[i] == dvd) {
-                find = i;
-                break;
+
+    public void printStore() {
+        for (Media media : itemsInStore) {
+            System.out.println(media);
+        }
+    }
+
+    public Media searchByTitle(String title) {
+        for (Media media : itemsInStore) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
             }
         }
-
-        if (find == -1) {
-            System.out.println("The DVD does not exist!");
-            return;
-        }
-
-        for (int i = find; i < qtyInStore - 1; i++) {
-            itemsInStore[i] = itemsInStore[i + 1];
-        }
-
-        itemsInStore[qtyInStore - 1] = null;
-        qtyInStore--;
-
-        System.out.println("The DVD has been removed from the store");
+        return null;
     }
-
 }

@@ -1,9 +1,0 @@
-Q1:Is JAVA a Pass by Value or a Pass by Reference programming language?
-
-a. Vì sao swap() không hoạt động?
-- Hàm swap() nhận bản sao của các tham chiếu đến đối tượng. Khi hoán đổi, nó chỉ thay đổi các bản sao này nên không làm ảnh hưởng đến các tham chiếu ban đầu bên ngoài hàm.
-
-b.Vì sao changeTitle() lại hoạt động?
-- Mặc dù tham chiếu được truyền dưới dạng bản sao, nhưng nó vẫn trỏ đến cùng một đối tượng trong bộ nhớ. Do đó, khi thay đổi thuộc tính của đối tượng, đối tượng gốc cũng bị thay đổi.
-
-Ta kết luận: Java luôn sử dụng pass by value, kể cả khi làm việc với object.
