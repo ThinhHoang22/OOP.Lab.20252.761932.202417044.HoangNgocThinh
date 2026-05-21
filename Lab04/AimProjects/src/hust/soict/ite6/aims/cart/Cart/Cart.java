@@ -1,0 +1,113 @@
+package hust.soict.ite6.aims.cart.Cart;
+
+import hust.soict.ite6.aims.disc.DigitalVideoDisc.DigitalVideoDisc;
+
+public class Cart {
+		public static final int MAX_NUMBERS_ORDERED = 20;
+		private DigitalVideoDisc itemsOrdered[];
+		private int qtyOrdered;
+		public Cart() {
+			itemsOrdered = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
+	        qtyOrdered = 0;
+		}
+		public void addDigitalVideoDisc(DigitalVideoDisc disc) {
+			if(qtyOrdered >= MAX_NUMBERS_ORDERED) {
+				System.out.println("The cart is almost full");
+				return;
+			}
+			itemsOrdered[qtyOrdered] = disc;
+			qtyOrdered++;
+			System.out.println("The disc has been added");
+		}
+		
+//		Add bằng Array
+//		public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+//		    for (int i = 0; i < dvdList.length; i++) {
+//		        addDigitalVideoDisc(dvdList[i]);
+//		    }
+//		}
+		
+//		Add theo list
+		public void addDigitalVideoDisc(DigitalVideoDisc... dvdList) {
+		    for (DigitalVideoDisc dvd : dvdList) {
+		        addDigitalVideoDisc(dvd);
+		    }
+		}
+		
+// 		Add 2 DVD
+		public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+		    addDigitalVideoDisc(dvd1);
+		    addDigitalVideoDisc(dvd2);
+		}
+		
+		public float totalCost() {
+			float total = 0;
+			for (int i=0; i<qtyOrdered;i++) {
+				total += itemsOrdered[i].getCost();
+			}
+			return total;
+		}
+		
+		public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
+			int find = -1;
+			// Tìm vị trí vid cần xóa
+			for (int i = 0 ; i<qtyOrdered ; i++) {
+				if (itemsOrdered[i]==disc) {
+					find = i;
+					break;
+				}
+			}
+			
+			if (find == -1) {
+				System.out.println("The dics wat not exist in the cart!");
+				return;
+			}
+			
+			// Thực hiện việc dịch chèn lên trước (vid cần xóa sẽ bị đè)
+			for (int i = find ; i < qtyOrdered; i++) {
+				itemsOrdered[i] = itemsOrdered[i+1];
+			}
+			
+			// Vị trí cuối sẽ null vì bị xóa 1 vid r
+			itemsOrdered[qtyOrdered - 1] = null;
+			qtyOrdered--;
+			System.out.println("The disc has been removed");	
+		}
+		
+		// Thực hiện in Cart
+		public void printCart(){
+	        System.out.println("***********************CART***********************\nOrdered Items:");
+	        for(int i=0; i<qtyOrdered; i++){
+	            System.out.println((i+1)+". DVD - "+itemsOrdered[i].toString());
+	        }
+	        System.out.println("Total cost: "+totalCost());
+	        System.out.println("***************************************************");
+	    }
+		
+		// Tìm kiếm theo ID
+		public void searchById(int id) {
+		    for (int i = 0; i < qtyOrdered; i++) {
+		        if (itemsOrdered[i].getId() == id) {
+		            System.out.println("Found: " + itemsOrdered[i].toString());
+		            return;
+		        }
+		    }
+		    System.out.println("No matching DVD found!");
+		}
+		
+		// Tìm kiếm theo title
+		public void searchByTitle(String title) {
+		    boolean found = false;
+
+		    for (int i = 0; i < qtyOrdered; i++) {
+		        if (itemsOrdered[i].isMatch(title)) {
+		            System.out.println("Found: " + itemsOrdered[i].toString());
+		            found = true;
+		        }
+		    }
+
+		    if (!found) {
+		        System.out.println("No matching DVD found!");
+		    }
+		}
+}

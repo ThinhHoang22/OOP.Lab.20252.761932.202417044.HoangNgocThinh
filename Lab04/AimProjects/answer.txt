@@ -1,0 +1,44 @@
+#Lab04
+
+Q1(Ex09): Which classes are aggregates of other classes? Checking all constructors of whole classes if they initialize for their parts?
+
+- Các lớp có chứa các đối tượng khác trong hệ thống là:
+	+ Cart: chứa các đối tượng Media
+	+ Store: chứa các đối tượng Media
+	+ CompactDisc: chứa đối tượng Tracks 
+
+- Các lớp này có quan hệ “has-a”, tức là chúng không tự tạo ra vòng đời của đối tượng bên trong, mà chỉ quản lý và sử dụng các đối tượng đó. 
+Vì vậy đây là quan hệ aggregation, không phải kế thừa.
+
+
+Q2(Ex10): If the passing object is not an instance of Media, what happens?
+
+- Nếu object truyền vào không phải là instance của Media thì phương thức equals() nên trả về false.
+- Điều này giúp tránh lỗi ClassCastException khi ép kiểu object sang Media. Vì vậy trước khi ép kiểu cần kiểm tra bằng toán tử instanceof.
+
+Q3(Ex11): Observe what happens and explain in detail.
+- Khi duyệt một ArrayList<Media> và gọi phương thức toString(), Java sẽ tự động gọi đúng phương thức toString() tương ứng với kiểu thật của object.
+- Với mỗi kiểu Media sẽ có các phương thức toString tương ứng: Book.toString(),...
+- Đây là tính đa hình trong Java. Mặc dù tất cả object đều được lưu dưới kiểu Media, Java vẫn xác định đúng phương thức cần thực thi dựa trên kiểu
+thật của object tại runtime.
+
+
+Q3(Ex12):
+
+1, What class should implement the Comparable interface?
+- Class Media nên implement interface Comparable, vì tất cả các loại Media đều là lớp con của class Media và chúng dều cần được so sánh và 
+sắp xếp trong Cart
+
+
+2, In those classes, how should you implement the compareTo()method be to reflect the ordering that we want?
+- Trong phương thức Media.compareTo()ó thể được cài đặt để: so sánh title theo thứ tự alphabet trước, nếu title giống nhau thì so sánh cost
+
+3, Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this 
+Comparable interface approach?
+- Không thể. 
+- Với Comparable, mỗi class chỉ có thể có một phương thức compareTo(), nên chỉ hỗ trợ một quy tắc sắp xếp mặc định được định nghĩa trong phương thức.
+
+4, Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would 
+you modify your code to allow this?
+- Chúng ta nên tạo một comparator riêng cho class DVD để sắp xếp theo thứ tự đề yêu cầu.
+- Cách này linh hoạt vì mỗi loại media có thể có các quy tắc sắp xếp riêng mà không cần chỉnh trực tiếp đến lớp cha class Media.
