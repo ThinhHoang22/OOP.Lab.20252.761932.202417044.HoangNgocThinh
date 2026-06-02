@@ -1,0 +1,51 @@
+# Lab 05
+Câu hỏi 1: So sánh các thành phần giữa Swing và AWT
+
+1. Về vùng chứa cấp cao nhất (Top-level containers):
+   - AWT: Sử dụng lớp 'Frame'. Các thành phần giao diện (components) có thể được thêm (add) trực tiếp vào Frame này.
+   - Swing: Sử dụng lớp 'JFrame'. Các thành phần không được phép thêm trực tiếp vào JFrame mà bắt buộc phải thêm vào vùng chứa nội dung của nó, gọi là 'content-pane' (được lấy ra thông qua hàm getContentPane()).
+
+2. Về tên lớp của các thành phần giao diện (Component Class Names):
+   - AWT: Tên các thành phần được viết bình thường (Ví dụ: Label, TextField, Button). Đây là các thành phần "nặng" (heavyweight) vì chúng phụ thuộc hoàn toàn vào giao diện của hệ điều hành gốc đang chạy.
+   - Swing: Tên các thành phần luôn có thêm tiền tố chữ 'J' ở đầu (Ví dụ: JLabel, JTextField, JButton). Đây là các thành phần "nhẹ" (lightweight) được vẽ hoàn toàn bằng mã nguồn Java, giúp giao diện hiển thị đồng nhất và đẹp mắt trên mọi hệ điều hành (Windows, macOS, Linux).
+
+Câu hỏi 2: Giải thích hoặc hoàn thiện logic cho nút bấm DEL và C trong NumberGrid.
+
+1. "C" (Clear) button:
+   - Logic: Khi người dùng nhấn nút C, toàn bộ nội dung hiện tại trên màn hình hiển thị sẽ bị xóa sạch, đưa ô nhập về trạng thái trống rỗng.
+		
+2. "DEL" (Delete) button:
+   - Logic: Khi người dùng nhấn nút DEL, chương trình sẽ xóa đi ký tự cuối cùng ở bên phải chuỗi văn bản đang hiển thị. Tuy nhiên, cần phải kiểm tra điều kiện chuỗi đó không bị rỗng để tránh gặp lỗi StringIndexOutOfBoundsException.
+		
+
+Câu hỏi 3: Cơ chế hoạt động của ứng dụng vẽ đồ họa (Painter) bằng JavaFX
+   - Cơ chế tạo hiệu ứng nét vẽ liên tục khi kéo chuột: khi người dùng nhấn giữ và rê chuột trên vùng vẽ , sự kiện sẽ liên tục được kích hoạt. Tại mỗi thời điểm, hệ thống sẽ  lấy ra tọa độ chính xác của con trỏ chuột và khởi tạo một đối tượng hình tròn nhỏ. Hình tròn này ngay lập tức được add vào danh sách phần tử con của Pane. Do tần suất bắt sự kiện của chuột rất nhanh, các hình tròn nhỏ này nằm đè và nối tiếp sát nhau, tạo ra hiệu ứng đánh lừa thị giác giống như một nét vẽ liền mạch.
+   - Sự tương tác: Cả hai nút Pen và Eraser đều là 'RadioButton' và được gán chung vào một nhóm duy nhất là 'ToggleGroup'. Điều này đảm bảo tính loại trừ lẫn nhau: người dùng chỉ được phép chọn một trong hai công cụ tại một thời điểm (chọn cái này thì cái kia tự nhả ra).
+   - Logic của Cục tẩy (Eraser): Bản chất cục tẩy trong cấu trúc đồ họa Scene Graph của JavaFX. Khi chuyển sang chế độ Eraser, hệ thống sẽ đổi màu tô của các hình tròn mới được tạo ra thành màu TRẮNG ('Color.WHITE') - trùng với màu nền của bảng vẽ. 
+   - Nút "Clear": Khi người dùng bấm nút Clear, lệnh sẽ quét sạch toàn bộ danh sách các đối tượng con ra khỏi cây phân cấp đồ họa (Scene Graph) của vùng vẽ, đưa bảng trở về trạng thái trống rỗng nguyên bản.
+
+Câu hỏi 4: Trình bày cơ chế xử lý ngoại lệ trong hệ thống AIMS
+   - Xử lý ngoại lệ giúp chương trình không bị crash khi xảy ra lỗi runtime.
+   - Sử dụng try-catch và throw để xử lý các trường hợp như nhập sai dữ liệu hoặc vượt giới hạn giỏ hàng.
+   - Exception có thể được bắt và hiển thị thông báo cho người dùng.
+
+Câu hỏi 5: Trình bày về lớp ngoại lệ PlayerException trong AIMS Project
+   - PlayerException là ngoại lệ tự định nghĩa dùng khi phát media không hợp lệ.
+   - Kế thừa từ lớp Exception của Java. 
+   - Interface Playable phải khai báo throws PlayerException.
+   - Nếu length <= 0 thì play() sẽ throw PlayerException khi phát các đối tượng đa phương tiện như DVD, CD hoặc Track
+   - Khi ngoại lệ được phát sinh, chương trình sẽ bắt lỗi bằng try-catch và hiển thị thông báo phù hợp cho người dùng thay vì làm chương trình dừng đột ngột.
+=> Mục đích: đảm bảo chỉ media hợp lệ được phát, giúp tăng tính ổn định và thân thiện của ứng dụng.
+
+Câu hỏi 6: Giải thích phương thức equals() trong lớp Media
+   - Hai Media được coi là bằng nhau nếu có cùng title.
+   - Khi override equals():
+	+ phải kiểm tra null
+	+ phải kiểm tra instanceof
+  => sau đó so sánh title
+
+Câu hỏi 7: Mô tả cây phân cấp ngoại lệ trong AIMS Project
+   - Các exception tự định nghĩa nên kế thừa từ Exception.
+   - Có thể tạo cây phân cấp để quản lý lỗi rõ ràng.
+   - Ví dụ: MediaException là lớp cha, PlayerException kế thừa từ MediaException.
+   - Giúp hệ thống dễ mở rộng và xử lý lỗi theo từng loại.
